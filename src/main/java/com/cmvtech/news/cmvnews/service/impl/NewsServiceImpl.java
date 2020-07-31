@@ -3,9 +3,10 @@ package com.cmvtech.news.cmvnews.service.impl;
 import com.cmvtech.news.cmvnews.io.entity.NewsEntity;
 import com.cmvtech.news.cmvnews.io.repository.NewsRepository;
 import com.cmvtech.news.cmvnews.service.NewsService;
+import com.cmvtech.news.cmvnews.shared.dto.NewsDto;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Optional;
 
 @Service
 public class NewsServiceImpl implements NewsService {
@@ -17,9 +18,15 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public NewsEntity createNews(NewsEntity newsEntity) {
+    public NewsDto createNews(NewsDto newsDto) {
+        NewsEntity newsEntity = new NewsEntity();
+        newsEntity.setContent(newsDto.getContent());
+        newsEntity.setDescription(newsDto.getDescription());
+        newsEntity.setImgPath(newsDto.getImgPath());
+        newsEntity.setTitle(newsDto.getTitle());
+
         newsRepository.save(newsEntity);
-        return newsEntity;
+        return newsDto;
     }
 
     @Override
@@ -28,14 +35,21 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public NewsEntity deleteNews(NewsEntity newsEntity) {
-        newsRepository.deleteById(newsEntity.getId());
-        return newsEntity;
+    public void deleteNews(long newsId) {
+        newsRepository.deleteById(newsId);
     }
 
     @Override
-    public NewsEntity updateNews(NewsEntity newsEntity) {
-        newsRepository.findById(newsEntity.getId());
-        return newsEntity;
+    public NewsDto updateNews(long newsId, NewsDto newsDto) {
+        Optional<NewsEntity> newsEntity = newsRepository.findById(newsId);
+        if(newsEntity.isPresent()){
+            newsEntity.get().setTitle(newsDto.getTitle());
+            newsEntity.get().setDescription(newsDto.getDescription());
+            newsEntity.get().setContent(newsDto.getContent());
+            newsEntity.get().setImgPath(newsDto.getImgPath());
+            newsRepository.save(newsEntity.get());
+        }
+
+        return newsDto;
     }
 }

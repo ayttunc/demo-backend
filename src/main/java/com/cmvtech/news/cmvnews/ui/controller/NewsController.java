@@ -1,6 +1,10 @@
 package com.cmvtech.news.cmvnews.ui.controller;
 
-import org.springframework.http.MediaType;
+import com.cmvtech.news.cmvnews.service.NewsService;
+import com.cmvtech.news.cmvnews.shared.dto.NewsDto;
+import com.cmvtech.news.cmvnews.ui.model.request.NewsDetailRequestModel;
+import com.cmvtech.news.cmvnews.ui.model.response.NewsDetailResponseModel;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,18 +12,40 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api")
 public class NewsController {
 
+    private final NewsService newsService;
+
+    public NewsController(NewsService newsService) {
+        this.newsService = newsService;
+    }
+
     @GetMapping(value = "/news")
     public ResponseEntity listAllNews() {
-        return ResponseEntity.ok("List All news.");
+        return ResponseEntity.ok(newsService.findAllNews());
+    }
+
+    @PostMapping(value = "/news")
+    public ResponseEntity createNews(@RequestBody NewsDetailRequestModel newsDetails){
+        ModelMapper modelMapper = new ModelMapper();
+        NewsDto newsDto = modelMapper.map(newsDetails, NewsDto.class);
+
+        NewsDto createdNews = newsService.createNews(newsDto);
+
+        NewsDetailResponseModel newsResponse = modelMapper.map(createdNews, NewsDetailResponseModel.class);
+        return ResponseEntity.ok(newsResponse);
     }
 
     @PutMapping(value = "/news/{id}")
-    public ResponseEntity updateOneOfNews(@PathVariable int id) {
-        return ResponseEntity.ok("News Updated: ".concat(String.valueOf(id)));
+    public ResponseEntity updateOneOfNews(@PathVariable int id, @RequestBody NewsDetailRequestModel newsDetail) {
+
+        ModelMapper mapper = new ModelMapper();
+        NewsDto newsDto = mapper.map(newsDetail, NewsDto.class);
+        NewsDto returnNewsDto = newsService.updateNews(id, newsDto);
+        return ResponseEntity.ok(mapper.map(returnNewsDto, NewsDetailResponseModel.class));
     }
 
     @DeleteMapping(value = "/news/{id}")
     public ResponseEntity deleteOneOfNews(@PathVariable int id) {
-        return ResponseEntity.status(200).body("News deleted");
+        newsService.deleteNews(id);
+        return ResponseEntity.status(200).body("News Deleted");
     }
 }

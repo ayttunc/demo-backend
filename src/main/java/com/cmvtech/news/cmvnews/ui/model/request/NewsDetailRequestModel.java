@@ -1,9 +1,9 @@
-package com.cmvtech.news.cmvnews.shared.dto;
+package com.cmvtech.news.cmvnews.ui.model.request;
 
 import lombok.Data;
 
 @Data
-public class NewsDto {
+public class NewsDetailRequestModel {
 
     private String title;
     private String description;

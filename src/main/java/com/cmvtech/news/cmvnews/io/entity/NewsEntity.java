@@ -7,11 +7,8 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name = "News")
-public class NewsEntity {
+public class NewsEntity extends BaseEventEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
 
     @Column(nullable = false)
     private String title;
@@ -23,5 +20,5 @@ public class NewsEntity {
     private String content;
 
     @Column
-    private String url;
+    private String imgPath;
 }

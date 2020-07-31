@@ -8,11 +8,15 @@ import javax.persistence.*;
 @Data
 @Table(name = "ANNOUNCEMENT")
 @Entity
-public class AnnouncementEntity {
+public class AnnouncementEntity extends BaseEventEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
 
+    @Column
+    private String title;
+
+    @Column
+    private String description;
+
+    @Column String validUntil;
 
 }

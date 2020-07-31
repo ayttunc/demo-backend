@@ -1,16 +1,15 @@
 package com.cmvtech.news.cmvnews.service;
 
 import com.cmvtech.news.cmvnews.io.entity.NewsEntity;
-
-import java.util.List;
+import com.cmvtech.news.cmvnews.shared.dto.NewsDto;
 
 public interface NewsService {
 
-    NewsEntity createNews(NewsEntity newsEntity);
+    NewsDto createNews(NewsDto newsDto);
 
     Iterable<NewsEntity> findAllNews();
 
-    NewsEntity deleteNews(NewsEntity newsEntity);
+    void deleteNews(long newsId);
 
-    NewsEntity updateNews(NewsEntity newsEntity);
+    NewsDto updateNews(long newsId, NewsDto newsDto);
 }
