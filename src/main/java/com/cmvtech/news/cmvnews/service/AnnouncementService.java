@@ -12,5 +12,7 @@ public interface AnnouncementService {
 
     void deleteAnnouncement(long announcementId);
 
-    AnnouncementDTO updateAnnouncement(long announcementId, AnnouncementDTO announcementDTO);
+    AnnouncementDTO updateAnnouncement(long announcementId, AnnouncementDTO announcementDTO) throws Exception;
+
+    AnnouncementDTO findSingleAnnouncement(long announcementId) throws Exception;
 }

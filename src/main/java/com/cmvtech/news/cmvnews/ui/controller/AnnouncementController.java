@@ -23,6 +23,11 @@ public class AnnouncementController {
         return ResponseEntity.ok(announcementService.findAllAnnouncements());
     }
 
+    @GetMapping(value = "/announcements/{id}")
+    public ResponseEntity getSingleNews(@PathVariable long id) throws Exception {
+        return ResponseEntity.ok(announcementService.findSingleAnnouncement(id));
+    }
+
     @PostMapping(value = "/announcements")
     public ResponseEntity createAnnouncement(@RequestBody AnnouncementDetailRequestModel anncDetail) {
         ModelMapper mapper = new ModelMapper();
@@ -35,7 +40,7 @@ public class AnnouncementController {
     }
 
     @PutMapping(value = "/announcements/{id}")
-    public ResponseEntity updateOneOfNews(@PathVariable int id, @RequestBody AnnouncementDetailRequestModel anncDetail) {
+    public ResponseEntity updateOneOfNews(@PathVariable int id, @RequestBody AnnouncementDetailRequestModel anncDetail) throws Exception {
 
         ModelMapper mapper = new ModelMapper();
         AnnouncementDTO anncDto = mapper.map(anncDetail, AnnouncementDTO.class);
@@ -48,6 +53,6 @@ public class AnnouncementController {
     @DeleteMapping(value = "/announcements/{id}")
     public ResponseEntity deleteOneOfNews(@PathVariable int id) {
         announcementService.deleteAnnouncement(id);
-        return ResponseEntity.status(200).body("Announcement deleted");
+        return ResponseEntity.status(200).body("");
     }
 }
