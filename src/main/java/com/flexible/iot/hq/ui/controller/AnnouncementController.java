@@ -1,7 +1,7 @@
 package com.flexible.iot.hq.ui.controller;
 
 import com.flexible.iot.hq.service.AnnouncementService;
-import com.flexible.iot.hq.shared.dto.AnnouncementDTO;
+import com.flexible.iot.hq.shared.dto.AnnouncementDto;
 import com.flexible.iot.hq.ui.model.request.AnnouncementDetailRequestModel;
 import com.flexible.iot.hq.ui.model.response.AnnouncementDetailResponseModel;
 import org.modelmapper.ModelMapper;
@@ -31,9 +31,9 @@ public class AnnouncementController {
     @PostMapping(value = "/announcements")
     public ResponseEntity createAnnouncement(@RequestBody AnnouncementDetailRequestModel anncDetail) {
         ModelMapper mapper = new ModelMapper();
-        AnnouncementDTO anncDTO = mapper.map(anncDetail, AnnouncementDTO.class);
+        AnnouncementDto anncDTO = mapper.map(anncDetail, AnnouncementDto.class);
 
-        AnnouncementDTO createdAnnouncement = announcementService.createAnnouncement(anncDTO);
+        AnnouncementDto createdAnnouncement = announcementService.createAnnouncement(anncDTO);
 
         AnnouncementDetailResponseModel anncResponse = mapper.map(createdAnnouncement, AnnouncementDetailResponseModel.class);
         return ResponseEntity.ok(anncResponse);
@@ -43,7 +43,7 @@ public class AnnouncementController {
     public ResponseEntity updateOneOfNews(@PathVariable int id, @RequestBody AnnouncementDetailRequestModel anncDetail) throws Exception {
 
         ModelMapper mapper = new ModelMapper();
-        AnnouncementDTO anncDto = mapper.map(anncDetail, AnnouncementDTO.class);
+        AnnouncementDto anncDto = mapper.map(anncDetail, AnnouncementDto.class);
         anncDto = announcementService.updateAnnouncement(id, anncDto);
 
         AnnouncementDetailResponseModel responseModel = mapper.map(anncDto, AnnouncementDetailResponseModel.class);

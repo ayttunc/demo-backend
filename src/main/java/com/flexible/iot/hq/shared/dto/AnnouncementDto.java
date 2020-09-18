@@ -3,7 +3,7 @@ package com.flexible.iot.hq.shared.dto;
 import lombok.Data;
 
 @Data
-public class AnnouncementDTO {
+public class AnnouncementDto {
 
     private String title;
     private String description;

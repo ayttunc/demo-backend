@@ -2,17 +2,17 @@ package com.flexible.iot.hq.service;
 
 
 import com.flexible.iot.hq.io.entity.AnnouncementEntity;
-import com.flexible.iot.hq.shared.dto.AnnouncementDTO;
+import com.flexible.iot.hq.shared.dto.AnnouncementDto;
 
 public interface AnnouncementService {
 
-    AnnouncementDTO createAnnouncement(AnnouncementDTO announcementDTO);
+    AnnouncementDto createAnnouncement(AnnouncementDto announcementDTO);
 
     Iterable<AnnouncementEntity> findAllAnnouncements();
 
     void deleteAnnouncement(long announcementId);
 
-    AnnouncementDTO updateAnnouncement(long announcementId, AnnouncementDTO announcementDTO) throws Exception;
+    AnnouncementDto updateAnnouncement(long announcementId, AnnouncementDto announcementDTO) throws Exception;
 
-    AnnouncementDTO findSingleAnnouncement(long announcementId) throws Exception;
+    AnnouncementDto findSingleAnnouncement(long announcementId) throws Exception;
 }
