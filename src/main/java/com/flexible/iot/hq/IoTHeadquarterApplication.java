@@ -1,10 +1,12 @@
 package com.flexible.iot.hq;
 
 import com.flexible.iot.hq.config.FileStorageConfig;
+import com.flexible.iot.hq.security.AppProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.env.Environment;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
@@ -12,6 +14,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
         FileStorageConfig.class
 })
 public class IoTHeadquarterApplication {
+
+    private final Environment env;
+
+    public IoTHeadquarterApplication(Environment env) {
+        this.env = env;
+    }
 
     /**
      * Spring security de bir sorun mu var nedir bilmiyorum bir türlü güvenlik kısmı düzgün çalışmadı.
@@ -29,5 +37,10 @@ public class IoTHeadquarterApplication {
     @Bean
     public SpringApplicationContext springApplicationContext(){
         return new SpringApplicationContext();
+    }
+
+    @Bean(name="AppProperties")
+    public AppProperties getAppProperties() {
+        return new AppProperties(env);
     }
 }
