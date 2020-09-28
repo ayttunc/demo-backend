@@ -1,14 +1,14 @@
 package com.flexible.iot.hq.security;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.flexible.iot.hq.SpringApplicationContext;
 import com.flexible.iot.hq.service.UserService;
 import com.flexible.iot.hq.shared.dto.UserDto;
 import com.flexible.iot.hq.ui.model.request.UserLoginRequestModel;
+import com.flexible.iot.hq.ui.model.response.LoginResponseModel;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
+@Slf4j
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     private final AuthenticationManager authenticationManager;
@@ -58,6 +59,8 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
                                             FilterChain chain,
                                             Authentication authResult) throws IOException, ServletException {
 
+        ObjectMapper mapper = new ObjectMapper();
+
         String userName = ((User) authResult.getPrincipal()).getUsername();
 
         String token = Jwts.builder()
@@ -71,5 +74,13 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
         response.addHeader(SecurityConstants.HEADER_STRING, SecurityConstants.TOKEN_PREFIX + token);
         response.addHeader("UserID", userDto.getUserId());
+
+        LoginResponseModel loginResponseModel = new LoginResponseModel();
+        loginResponseModel.setAuthorization(SecurityConstants.TOKEN_PREFIX + token);
+        loginResponseModel.setUserId(userDto.getUserId());
+        response.getWriter().write(mapper.writeValueAsString(loginResponseModel));
+        logger.info(response);
+//        response.addHeader("responsetype", "text");
+
     }
 }
