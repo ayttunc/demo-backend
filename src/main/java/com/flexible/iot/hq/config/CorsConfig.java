@@ -22,7 +22,7 @@ public class CorsConfig {
                         .addMapping("/**")
                         .allowedMethods("GET", "PUT", "POST", "DELETE")
                         .allowedHeaders("*")
-                        .allowedOrigins("allowedOrigins");
+                        .allowedOrigins("*");
             }
         };
     }
