@@ -21,10 +21,6 @@ public class IoTHeadquarterApplication {
         this.env = env;
     }
 
-    /**
-     * Spring security de bir sorun mu var nedir bilmiyorum bir türlü güvenlik kısmı düzgün çalışmadı.
-     * @param args
-     */
     public static void main(String[] args) {
         SpringApplication.run(IoTHeadquarterApplication.class, args);
     }
