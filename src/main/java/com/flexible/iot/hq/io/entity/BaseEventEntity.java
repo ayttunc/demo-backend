@@ -15,5 +15,4 @@ public class BaseEventEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-
 }

@@ -17,6 +17,9 @@ public class AnnouncementEntity extends BaseEventEntity {
     @Column
     private String description;
 
-    @Column String validUntil;
+    @Column
+    private String validUntil;
+
+
 
 }
