@@ -4,6 +4,7 @@ import com.flexible.iot.hq.io.entity.NewsEntity;
 import com.flexible.iot.hq.io.repository.NewsRepository;
 import com.flexible.iot.hq.service.NewsService;
 import com.flexible.iot.hq.shared.dto.NewsDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

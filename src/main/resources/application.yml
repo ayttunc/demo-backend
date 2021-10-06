@@ -1,0 +1,28 @@
+spring:
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          lob:
+            non_contextual_creation: 'true'
+    hibernate:
+      ddl-auto: update
+  servlet:
+    multipart:
+      max-file-size: 200MB
+      enabled: 'true'
+      max-request-size: 215MB
+      file-size-threshold: 2KB
+  datasource:
+    password: postgres
+    username: postgres
+    initialization-mode: always
+    url: jdbc:postgresql://localhost:5432/player_market
+    continue-on-error: 'true'
+encrypted:
+  property: ENC(uTSqb9grs1+vUv3iN8lItC0kl65lMG+8)
+allowedOrigins: '*'
+file:
+  upload-dir: C:\Users\ItuncWork\Downloads\
+TOKEN_SECRET: 2345GRWTEG343G
