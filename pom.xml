@@ -11,7 +11,7 @@
     <groupId>com.flexible.iot.hq</groupId>
     <artifactId>iot-headquarter</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>cmv-news</name>
+    <name>demo-backend</name>
     <description>flexible iot a.ş headquarter</description>
 
     <properties>

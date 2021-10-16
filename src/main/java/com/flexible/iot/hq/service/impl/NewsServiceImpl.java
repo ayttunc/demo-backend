@@ -7,6 +7,8 @@ import com.flexible.iot.hq.shared.dto.NewsDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -50,6 +52,8 @@ public class NewsServiceImpl implements NewsService {
             newsEntity.get().setImgPath(newsDto.getImgPath());
             newsRepository.save(newsEntity.get());
         }
+
+        List<List<String>> a = new ArrayList<>();
 
         return newsDto;
     }
